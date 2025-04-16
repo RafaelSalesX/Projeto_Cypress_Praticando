@@ -54,6 +54,25 @@ Antes de rodar os testes, você precisa ter o **Node.js** instalado. Caso não t
     npm install mochawesome --save-dev
 
 
-## Próximos Passos
+## Pipeline de Testes Automatizados com Cypress
 
-    No futuro, este projeto será configurado com uma pipeline CI/CD, automatizando a execução dos testes e a geração de relatórios sempre que houver alterações no código.
+    Este projeto conta com uma pipeline CI/CD configurada no GitHub Actions para executar testes automatizados com Cypress sempre que um Pull Request é aberto na branch main.
+
+1. Como funciona a pipeline:
+    Disparo automático via Pull Request:
+    A pipeline é executada automaticamente sempre que um Pull Request é aberto ou atualizado direcionado para a branch main.
+
+2. Ambiente de execução:
+    Os testes rodam em um ambiente Ubuntu na nuvem via GitHub Actions.
+
+3. Etapas da execução:
+
+3.1 Checkout do código: O repositório é clonado usando actions/checkout@v4.
+
+3.2 Instalação de dependências: É executado npm install para instalar os pacotes do projeto.
+
+3.3 Execução dos testes Cypress:
+    Utiliza a action oficial cypress-io/github-action@v6, com suporte à gravação de execuções no Dashboard do Cypress (usando a CYPRESS_RECORD_KEY).
+
+3.4 Upload do relatório de testes:
+    O relatório HTML gerado pelos testes é enviado como artefato (artifact) para o GitHub, podendo ser baixado após a execução da pipeline.
